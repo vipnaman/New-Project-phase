@@ -1,0 +1,40 @@
+{% extends 'admin/base.html' %}
+
+{% block title %}Admin Settings | RAKTA{% endblock %}
+
+{% block admin_content %}
+  <section class="page-hero">
+    <div class="container narrow">
+      <span class="eyebrow">Admin appearance</span>
+      <h1>Site design</h1>
+      <p>Changes here apply across the public website and are saved in the site database.</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container form-wrap">
+      <form id="appearanceSettingsForm" class="form-card">
+        <label>Color palette
+          <select name="palette">
+            <option value="red-blue">RAKTA red and blue</option>
+            <option value="berry">Berry and slate</option>
+            <option value="ocean">Ocean and coral</option>
+          </select>
+        </label>
+        <label>Animation intensity
+          <select name="motion_level">
+            <option value="reduced">Reduced motion</option>
+            <option value="balanced">Balanced</option>
+            <option value="expressive">Expressive</option>
+          </select>
+        </label>
+        <label class="checkbox-row"><input type="checkbox" name="live_background" /> Enable animated background across the site</label>
+        <p id="appearanceSettingsStatus" class="form-message" role="status" aria-live="polite"></p>
+        <button class="btn btn-primary" type="submit">Save appearance</button>
+      </form>
+    </div>
+  </section>
+{% endblock %}
+
+{% block scripts %}
+  <script src="{{ url_for('static', filename='js/api.js') }}"></script>
+{% endblock %}

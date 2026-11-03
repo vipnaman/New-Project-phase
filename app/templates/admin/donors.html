@@ -1,0 +1,20 @@
+{% extends 'admin/base.html' %}
+
+{% block title %}Admin Donors | RAKTA{% endblock %}
+
+{% block admin_content %}
+  <section class="page-hero">
+    <div>
+      <span class="eyebrow">Donor directory</span>
+      <h1>Donors</h1>
+      <p>Review donor blood groups, locations, and current availability.</p>
+    </div>
+  </section>
+  <section class="admin-data-section">
+    <label class="admin-filter">Filter donors<input type="search" data-table-filter="adminDonorsTable" placeholder="Search by name, group, city" /></label>
+    <p class="admin-status" id="adminStatus" role="status" aria-live="polite"></p>
+    <div class="table-scroll"><table class="admin-table"><thead><tr><th>Name</th><th>Blood group</th><th>City</th><th>State</th><th>Emergency</th><th>Availability / visibility</th><th></th></tr></thead><tbody id="adminDonorsTable"></tbody></table></div>
+  </section>
+{% endblock %}
+
+{% block scripts %}<script src="{{ url_for('static', filename='js/api.js') }}"></script>{% endblock %}

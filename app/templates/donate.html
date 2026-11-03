@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block title %}Become a Donor | RAKTA{% endblock %}
+
+{% block content %}
+  <section class="page-hero">
+    <div class="container narrow">
+      <span class="eyebrow">Donor registration</span>
+      <h1>Become a donor</h1>
+      <p>Register your profile to help people in your city and emergency network. Confirm eligibility with a healthcare professional before donating.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container form-wrap">
+      <form id="donorRegistrationForm" class="form-card">
+        <div class="form-row">
+          <label>Full name<input type="text" name="name" value="{{ current_user.name }}" readonly /></label>
+          <label>Account email<input type="email" name="email" value="{{ current_user.email }}" readonly /></label>
+        </div>
+        <div class="form-row">
+          <label>Phone<input type="text" name="phone" /></label>
+          <label>Blood Group
+            <select name="blood_group" required>
+              <option value="A+">A+</option>
+              <option value="A-">A-</option>
+              <option value="B+">B+</option>
+              <option value="B-">B-</option>
+              <option value="AB+">AB+</option>
+              <option value="AB-">AB-</option>
+              <option value="O+">O+</option>
+              <option value="O-">O-</option>
+            </select>
+          </label>
+        </div>
+        <div class="form-row">
+          <label>State
+            <select name="state" data-state-select><option value="">Choose a state</option></select>
+          </label>
+          <label>City / district
+            <select name="city" data-city-select disabled><option value="">Choose a state first</option></select>
+            <input name="city" data-city-manual placeholder="Enter city" hidden disabled />
+          </label>
+        </div>
+        <div class="form-row">
+          <label>Area<input type="text" name="area" /></label>
+          <label>Availability
+            <select name="availability">
+              <option value="available">Available</option>
+              <option value="busy">Busy</option>
+            </select>
+          </label>
+        </div>
+        <div class="form-row">
+          <label>Last donation date<input type="date" name="last_donation_date" /></label>
+          <label>Emergency available
+            <select name="emergency_available">
+              <option value="false">No</option>
+              <option value="true">Yes</option>
+            </select>
+          </label>
+        </div>
+        <label>Directory visibility
+          <select name="visibility">
+            <option value="public">Show my verified donor listing</option>
+            <option value="private">Keep my donor listing private</option>
+          </select>
+        </label>
+        <label>Bio<textarea name="bio" rows="4" placeholder="Tell people about your availability and health awareness."></textarea></label>
+        <label class="checkbox-row"><input type="checkbox" name="consent" required /> I understand that blood donation requires medical suitability confirmation.</label>
+        <p id="donorFormStatus" class="form-message" role="status" aria-live="polite"></p>
+        <button class="btn btn-primary" type="submit">Register as Donor</button>
+      </form>
+    </div>
+  </section>
+{% endblock %}
+
+{% block scripts %}
+  <script src="{{ url_for('static', filename='js/api.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'admin/base.html' %}
+
+{% block title %}Listing Reports | RAKTA{% endblock %}
+
+{% block admin_content %}
+  <section class="page-hero">
+    <div>
+      <span class="eyebrow">Safety review</span>
+      <h1>Listing reports</h1>
+      <p>Review reports about potentially incorrect or unsafe donor and hospital listings.</p>
+    </div>
+  </section>
+  <section class="admin-data-section">
+    <label class="admin-filter">Filter reports<input type="search" data-table-filter="adminReportsTable" placeholder="Search reports" /></label>
+    <p class="admin-status" id="adminStatus" role="status" aria-live="polite"></p>
+    <div class="table-scroll"><table class="admin-table"><thead><tr><th>Type</th><th>Listing</th><th>Reason</th><th>Reported by</th><th>Reported at</th><th>Status</th><th></th></tr></thead><tbody id="adminReportsTable"></tbody></table></div>
+  </section>
+{% endblock %}
+
+{% block scripts %}<script src="{{ url_for('static', filename='js/api.js') }}"></script>{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Settings | RAKTA{% endblock %}
+
+{% block content %}
+  <section class="page-hero">
+    <div class="container narrow">
+      <span class="eyebrow">Settings</span>
+      <h1>Account settings</h1>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container form-wrap">
+      <form id="notificationPreferencesForm" class="form-card">
+        <h2>Notifications</h2>
+        <label class="checkbox-label">
+          <input type="checkbox" name="email_notifications_enabled" />
+          Email me about matching requests, contact responses, and request updates.
+        </label>
+        <p class="form-message" id="notificationPreferencesStatus" role="status" aria-live="polite"></p>
+        <button class="btn btn-primary" type="submit">Save notification preferences</button>
+        <p>SMS notifications are not available yet. In-app notifications remain enabled.</p>
+      </form>
+      <form id="deleteAccountForm" class="form-card">
+        <h2>Remove account</h2>
+        <p>This disables sign-in, deletes your donor profile and request, contact, and donation history, and replaces your account identity with an anonymized record. Safety reports and audit records may remain with identifying details removed.</p>
+        <label>Current password<input type="password" name="password" autocomplete="current-password" required /></label>
+        <p class="form-message" id="deleteAccountStatus" role="status" aria-live="polite"></p>
+        <button class="btn btn-ghost" type="submit">Remove my account</button>
+      </form>
+    </div>
+  </section>
+{% endblock %}

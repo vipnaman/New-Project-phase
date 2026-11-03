@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Login | RAKTA{% endblock %}
+
+{% block content %}
+  <section class="section auth-section">
+    <div class="container form-wrap narrow">
+      <form id="loginForm" class="form-card">
+        <h1>Welcome back</h1>
+        <label>Email<input type="email" name="email" required /></label>
+        <label>Password
+          <span class="password-field">
+            <input type="password" name="password" autocomplete="current-password" required />
+            <button class="password-toggle" type="button" data-password-toggle aria-label="Show password" title="Show password">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/><path class="eye-slash" d="m4 4 16 16"/></svg>
+            </button>
+          </span>
+        </label>
+        <label class="remember-row"><input type="checkbox" name="remember" value="true" /> <span>Remember me on this device</span></label>
+        <p id="loginMessage" class="form-message" role="status" aria-live="polite"></p>
+        <button class="btn btn-primary" type="submit">Login</button>
+        <div class="auth-links">
+          <a href="{{ url_for('main.register_page') }}">Create a donor account</a>
+          {% if admin_setup_available %}<a href="{{ url_for('auth.initial_admin_setup') }}">Set up the initial administrator</a>{% endif %}
+        </div>
+      </form>
+    </div>
+  </section>
+{% endblock %}
+
+{% block scripts %}
+  <script src="{{ url_for('static', filename='js/api.js') }}"></script>
+{% endblock %}

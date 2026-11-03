@@ -1,0 +1,38 @@
+{% extends 'admin/base.html' %}
+
+{% block title %}Admin Dashboard | RAKTA{% endblock %}
+
+{% block admin_content %}
+  <section class="page-hero">
+    <div class="container narrow">
+      <span class="eyebrow">Admin</span>
+      <h1>Operations dashboard</h1>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container stats-grid">
+      <div class="stat-card"><span>Users</span><strong id="adminUsersCount">0</strong></div>
+      <div class="stat-card"><span>Donors</span><strong id="adminDonorsCount">0</strong></div>
+      <div class="stat-card"><span>Open requests</span><strong id="adminOpenRequestsCount">0</strong></div>
+      <div class="stat-card"><span>Hospitals</span><strong id="adminHospitalsCount">0</strong></div>
+      <a class="btn btn-secondary admin-appearance-link" href="{{ url_for('main.admin_settings') }}">Site appearance settings</a>
+    </div>
+  </section>
+  <section class="section admin-management">
+    <div class="container">
+      <div class="admin-shortcuts">
+        <a href="{{ url_for('main.admin_users') }}"><span>Accounts</span><strong>Manage users</strong><small>Review and update account access</small></a>
+        <a href="{{ url_for('main.admin_donors') }}"><span>Directory</span><strong>Manage donors</strong><small>Check location and availability</small></a>
+        <a href="{{ url_for('main.admin_requests') }}"><span>Operations</span><strong>Manage requests</strong><small>Update fulfillment progress</small></a>
+        <a href="{{ url_for('main.admin_hospitals') }}"><span>Partners</span><strong>Manage hospitals</strong><small>Verify partner records</small></a>
+        <a href="{{ url_for('main.admin_reports') }}"><span>Safety</span><strong>Review listing reports</strong><small>Investigate incorrect or unsafe listings</small></a>
+        <a href="{{ url_for('main.admin_analytics') }}"><span>Audit</span><strong>View activity</strong><small>Review recent admin changes</small></a>
+        <a href="{{ url_for('main.admin_settings') }}"><span>Appearance</span><strong>Manage site design</strong><small>Palette, motion, and background</small></a>
+      </div>
+    </div>
+  </section>
+{% endblock %}
+
+{% block scripts %}
+  <script src="{{ url_for('static', filename='js/api.js') }}"></script>
+{% endblock %}

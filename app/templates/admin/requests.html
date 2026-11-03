@@ -1,0 +1,20 @@
+{% extends 'admin/base.html' %}
+
+{% block title %}Admin Requests | RAKTA{% endblock %}
+
+{% block admin_content %}
+  <section class="page-hero">
+    <div>
+      <span class="eyebrow">Request operations</span>
+      <h1>Blood requests</h1>
+      <p>Track urgency, required units, location, and fulfillment status.</p>
+    </div>
+  </section>
+  <section class="admin-data-section">
+    <label class="admin-filter">Filter requests<input type="search" data-table-filter="adminRequestsTable" placeholder="Search by patient, group, city" /></label>
+    <p class="admin-status" id="adminStatus" role="status" aria-live="polite"></p>
+    <div class="table-scroll"><table class="admin-table"><thead><tr><th>Patient</th><th>Group</th><th>Units</th><th>Urgency</th><th>Location</th><th>Status</th><th></th></tr></thead><tbody id="adminRequestsTable"></tbody></table></div>
+  </section>
+{% endblock %}
+
+{% block scripts %}<script src="{{ url_for('static', filename='js/api.js') }}"></script>{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'admin/base.html' %}
+
+{% block title %}Admin Hospitals | RAKTA{% endblock %}
+
+{% block admin_content %}
+  <section class="page-hero">
+    <div>
+      <span class="eyebrow">Hospital partners</span>
+      <h1>Hospitals</h1>
+      <p>Review registered hospital contacts and verify partner records.</p>
+    </div>
+  </section>
+  <section class="admin-data-section">
+    <h2>Add hospital for review</h2>
+    <form id="adminHospitalForm" class="form-card admin-create-form">
+      <div class="form-row">
+        <label>Hospital name<input name="name" maxlength="180" required /></label>
+        <label>Phone<input name="phone" maxlength="30" /></label>
+      </div>
+      <div class="form-row">
+        <label>State<input name="state" maxlength="80" required /></label>
+        <label>City<input name="city" maxlength="80" required /></label>
+      </div>
+      <label>Address<input name="address" maxlength="255" /></label>
+      <label>Contact email<input type="email" name="email" maxlength="150" /></label>
+      <p class="admin-status" id="hospitalCreateStatus" role="status" aria-live="polite"></p>
+      <button class="btn btn-primary" type="submit">Add unverified hospital</button>
+    </form>
+  </section>
+  <section class="admin-data-section">
+    <label class="admin-filter">Filter hospitals<input type="search" data-table-filter="adminHospitalsTable" placeholder="Search by name or location" /></label>
+    <p class="admin-status" id="adminStatus" role="status" aria-live="polite"></p>
+    <div class="table-scroll"><table class="admin-table"><thead><tr><th>Name</th><th>City</th><th>State</th><th>Address</th><th>Phone</th><th>Email</th><th>Verification</th><th></th></tr></thead><tbody id="adminHospitalsTable"></tbody></table></div>
+  </section>
+{% endblock %}
+
+{% block scripts %}<script src="{{ url_for('static', filename='js/api.js') }}"></script>{% endblock %}

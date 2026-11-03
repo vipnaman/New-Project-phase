@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Blood Requests | RAKTA{% endblock %}
+
+{% block content %}
+  <section class="page-hero">
+    <div class="container narrow">
+      <span class="eyebrow">Community demand</span>
+      <h1>Active blood requests</h1>
+    </div>
+  </section>
+  <section class="section muted-section">
+    <div class="container">
+      <p id="requestStatus" class="form-message" role="status" aria-live="polite"></p>
+      <div class="request-grid" id="requestList"></div>
+    </div>
+  </section>
+{% endblock %}
+
+{% block scripts %}
+  <script src="{{ url_for('static', filename='js/api.js') }}"></script>
+{% endblock %}

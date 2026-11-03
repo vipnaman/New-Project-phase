@@ -1,0 +1,20 @@
+{% extends 'admin/base.html' %}
+
+{% block title %}Admin Users | RAKTA{% endblock %}
+
+{% block admin_content %}
+  <section class="page-hero">
+    <div>
+      <span class="eyebrow">Accounts</span>
+      <h1>Users</h1>
+      <p>Review registered accounts and manage access.</p>
+    </div>
+  </section>
+  <section class="admin-data-section">
+    <label class="admin-filter">Filter users<input type="search" data-table-filter="adminUsersTable" placeholder="Search by name, email, role" /></label>
+    <p class="admin-status" id="adminStatus" role="status" aria-live="polite"></p>
+    <div class="table-scroll"><table class="admin-table"><thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Joined</th><th>Verified</th><th>Access</th><th></th></tr></thead><tbody id="adminUsersTable"></tbody></table></div>
+  </section>
+{% endblock %}
+
+{% block scripts %}<script src="{{ url_for('static', filename='js/api.js') }}"></script>{% endblock %}

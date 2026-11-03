@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block title %}Request Blood | RAKTA{% endblock %}
+
+{% block content %}
+  <section class="page-hero">
+    <div class="container narrow">
+      <span class="eyebrow">Emergency support</span>
+      <h1>Request blood</h1>
+      <p>Submit a request and receive matching donor suggestions while keeping your contact flow safe and organized.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container form-wrap">
+      <form id="bloodRequestForm" class="form-card">
+        <div class="form-row">
+          <label>Patient name<input type="text" name="patient_name" required /></label>
+          <label>Blood group
+            <select name="blood_group" required>
+              <option value="A+">A+</option>
+              <option value="A-">A-</option>
+              <option value="B+">B+</option>
+              <option value="B-">B-</option>
+              <option value="AB+">AB+</option>
+              <option value="AB-">AB-</option>
+              <option value="O+">O+</option>
+              <option value="O-">O-</option>
+            </select>
+          </label>
+        </div>
+        <div class="form-row">
+          <label>Units required<input type="number" name="units_required" min="1" value="1" /></label>
+          <label>Urgency
+            <select name="urgency">
+              <option value="normal">Normal</option>
+              <option value="urgent">Urgent</option>
+              <option value="emergency">Emergency</option>
+            </select>
+          </label>
+        </div>
+        <div class="form-row">
+          <label>City / district
+            <select name="city" data-city-select disabled required><option value="">Choose a state first</option></select>
+            <input name="city" data-city-manual placeholder="Enter city" hidden disabled required />
+          </label>
+          <label>State
+            <select name="state" data-state-select required><option value="">Choose a state</option></select>
+          </label>
+        </div>
+        <label>Verified hospital (optional)
+          <select name="hospital_id" data-hospital-select><option value="">Select a verified hospital</option></select>
+        </label>
+        <button class="btn btn-ghost" id="reportSelectedHospital" type="button" hidden>Report selected hospital</button>
+        <p id="hospitalReportStatus" class="form-message" role="status" aria-live="polite"></p>
+        <label>Additional details<textarea name="description" rows="4"></textarea></label>
+        <p id="requestFormStatus" class="form-message" role="status" aria-live="polite"></p>
+        <button class="btn btn-primary" type="submit">Submit Request</button>
+      </form>
+    </div>
+  </section>
+{% endblock %}
+
+{% block scripts %}
+  <script src="{{ url_for('static', filename='js/api.js') }}"></script>
+{% endblock %}

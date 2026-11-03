@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block title %}Find Blood | RAKTA{% endblock %}
+
+{% block content %}
+  <section class="page-hero">
+    <div class="container narrow">
+      <span class="eyebrow">Search donors</span>
+      <h1>Find blood near you</h1>
+      <p>Search for compatible donors by blood group, city, area, and availability.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <form class="search-form donor-search" id="donorSearchForm">
+        <label>
+          Blood Group
+          <select name="blood_group">
+            <option value="">Any</option>
+            <option value="A+">A+</option>
+            <option value="A-">A-</option>
+            <option value="B+">B+</option>
+            <option value="B-">B-</option>
+            <option value="AB+">AB+</option>
+            <option value="AB-">AB-</option>
+            <option value="O+">O+</option>
+            <option value="O-">O-</option>
+          </select>
+        </label>
+        <label>
+          State
+          <select name="state" data-state-select><option value="">Choose a state</option></select>
+        </label>
+        <label>
+          City / district
+          <select name="city" data-city-select disabled><option value="">Choose a state first</option></select>
+          <input name="city" data-city-manual placeholder="Enter city" hidden disabled />
+        </label>
+        <label>
+          Area
+          <input type="text" name="area" placeholder="Area" />
+        </label>
+        <label>
+          Availability
+          <select name="availability">
+            <option value="">Any</option>
+            <option value="available">Available</option>
+            <option value="busy">Busy</option>
+          </select>
+        </label>
+        <button class="btn btn-primary" type="submit">Find Blood</button>
+      </form>
+      <p id="donorSearchStatus" class="form-message" role="status" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <section class="section muted-section">
+    <div class="container">
+      <div id="donorResults" class="results-grid"></div>
+    </div>
+  </section>
+{% endblock %}
+
+{% block scripts %}
+  <script src="{{ url_for('static', filename='js/api.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}Initial Administrator Setup | RAKTA{% endblock %}
+
+{% block content %}
+  <section class="section auth-section">
+    <div class="container form-wrap narrow">
+      <form class="form-card" method="post" action="{{ url_for('auth.initial_admin_setup') }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token }}" />
+        <span class="eyebrow">One-time setup</span>
+        <h1>Create administrator</h1>
+        <p>This setup closes permanently after the first administrator account is created.</p>
+        {% if setup_enabled %}
+          {% if error %}<p class="form-message" role="alert">{{ error }}</p>{% endif %}
+          <label>Administrator name<input type="text" name="name" autocomplete="name" required /></label>
+          <label>Administrator email<input type="email" name="email" value="admin@gmail.com" readonly required /></label>
+          <label>Setup authorization token<input type="password" name="setup_token" autocomplete="off" required /></label>
+          <label>Password
+            <span class="password-field">
+              <input type="password" name="password" autocomplete="new-password" minlength="10" required />
+              <button class="password-toggle" type="button" data-password-toggle aria-label="Show password" title="Show password">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/><path class="eye-slash" d="m4 4 16 16"/></svg>
+              </button>
+            </span>
+          </label>
+          <button class="btn btn-primary" type="submit">Create administrator account</button>
+        {% else %}
+          <p class="setup-instructions">Initial admin creation is locked until a private <code>ADMIN_SETUP_TOKEN</code> is configured in the local environment. You can also create the administrator using the hidden-prompt command <code>flask --app run.py create-admin</code>.</p>
+        {% endif %}
+        <a class="auth-back-link" href="{{ url_for('main.login_page') }}">Back to login</a>
+      </form>
+    </div>
+  </section>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Profile | RAKTA{% endblock %}
+
+{% block content %}
+  <section class="page-hero">
+    <div class="container narrow">
+      <span class="eyebrow">Profile</span>
+      <h1>{{ current_user.name }}</h1>
+    </div>
+  </section>
+{% endblock %}

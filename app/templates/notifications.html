@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}Notifications | RAKTA{% endblock %}
+
+{% block content %}
+  <section class="page-hero">
+    <div class="container narrow">
+      <span class="eyebrow">Notification center</span>
+      <h1>Your updates</h1>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <h2>Notifications</h2>
+      <p id="notificationStatus" role="status" aria-live="polite"></p>
+      <div class="notification-list" id="notificationList"></div>
+      <h2>Donor contact requests</h2>
+      <p>Phone numbers are shared only after a donor accepts.</p>
+      <div class="notification-list" id="contactRequestList"></div>
+    </div>
+  </section>
+{% endblock %}
+
+{% block scripts %}<script src="{{ url_for('static', filename='js/api.js') }}"></script>{% endblock %}

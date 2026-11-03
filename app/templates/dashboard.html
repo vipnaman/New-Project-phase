@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard | RAKTA{% endblock %}
+
+{% block content %}
+  <section class="page-hero">
+    <div class="container narrow">
+      <span class="eyebrow">Dashboard</span>
+      <h1>Welcome, {{ current_user.name if current_user.is_authenticated else 'friend' }}</h1>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container stats-grid">
+      <div class="stat-card"><span>Donor status</span><strong id="dashboardDonorStatus">Loading</strong></div>
+      <div class="stat-card"><span>Your open requests</span><strong id="dashboardOpenRequests">0</strong></div>
+      <div class="stat-card"><span>Unread notifications</span><strong id="dashboardUnreadNotifications">0</strong></div>
+      <div class="stat-card"><span>Recorded donations</span><strong id="dashboardDonations">0</strong></div>
+    </div>
+  </section>
+  <section class="section muted-section">
+    <div class="container">
+      <div class="section-heading"><span class="eyebrow">Your activity</span><h2>Requests you created</h2></div>
+      <p id="dashboardStatus" role="status" aria-live="polite"></p>
+      <div class="request-grid" id="dashboardRequests"></div>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="{{ url_for('main.request_blood') }}">Create blood request</a>
+        <a class="btn btn-secondary" href="{{ url_for('main.donate') }}">Manage donor profile</a>
+        <a class="text-link" href="{{ url_for('main.notifications_page') }}">Open notification center</a>
+      </div>
+    </div>
+  </section>
+{% endblock %}
+
+{% block scripts %}<script src="{{ url_for('static', filename='js/api.js') }}"></script>{% endblock %}
