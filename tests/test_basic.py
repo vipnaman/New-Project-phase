@@ -393,6 +393,30 @@ def test_admin_can_save_global_appearance(client):
     assert client.get("/admin/settings").status_code == 200
 
 
+def test_admin_appearance_accepts_each_supported_palette(client):
+    admin = User(name="Admin", email="palette-admin@example.com", role="ADMIN")
+    admin.password = "admin-password"
+    db.session.add(admin)
+    db.session.commit()
+    client.post("/api/auth/login", json={"email": admin.email, "password": "admin-password"})
+
+    for palette in ("red-blue", "berry", "ocean", "forest", "lavender", "sunset", "gold"):
+        response = client.patch("/api/admin/appearance", json={
+            "palette": palette,
+            "motion_level": "balanced",
+            "live_background": False,
+        })
+        assert response.status_code == 200
+        assert response.get_json()["data"]["palette"] == palette
+
+    unsupported = client.patch("/api/admin/appearance", json={
+        "palette": "unknown",
+        "motion_level": "balanced",
+        "live_background": False,
+    })
+    assert unsupported.status_code == 400
+
+
 def test_admin_adds_and_verifies_hospital_before_public_listing(client):
     admin = User(name="Admin", email="hospital-admin@example.com", role="ADMIN")
     admin.password = "admin-password"

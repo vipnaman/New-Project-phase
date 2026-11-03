@@ -52,7 +52,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const paletteTokens = {
     'red-blue': { dark: ['#d94d59', '#b93649', '#5b91bd'], light: ['#c64250', '#a72d42', '#3976a6'] },
     berry: { dark: ['#c76179', '#9d4967', '#8292bd'], light: ['#a84461', '#8f3554', '#536d9c'] },
-    ocean: { dark: ['#e07866', '#c65a52', '#61a6ba'], light: ['#b95045', '#9c3f3c', '#28728d'] }
+    ocean: { dark: ['#e07866', '#c65a52', '#61a6ba'], light: ['#b95045', '#9c3f3c', '#28728d'] },
+    forest: { dark: ['#78b889', '#4d9467', '#8bb6a5'], light: ['#32744a', '#245c39', '#377a70'] },
+    lavender: { dark: ['#ad94e8', '#8669c5', '#82a2df'], light: ['#7252ad', '#593c91', '#426aab'] },
+    sunset: { dark: ['#f0a45f', '#d47748', '#d9818a'], light: ['#b85528', '#91401f', '#a63e5b'] },
+    gold: { dark: ['#e5ba60', '#c39135', '#7db2aa'], light: ['#96610d', '#754800', '#33776f'] }
   };
   let siteAppearance = { palette: 'red-blue', motion_level: 'balanced', live_background: true };
   const applyPalette = () => {

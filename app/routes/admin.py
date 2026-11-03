@@ -74,7 +74,7 @@ def admin_appearance():
     palette = payload.get("palette", appearance.palette)
     motion_level = payload.get("motion_level", appearance.motion_level)
     live_background = payload.get("live_background", appearance.live_background)
-    if palette not in {"red-blue", "berry", "ocean"}:
+    if palette not in {"red-blue", "berry", "ocean", "forest", "lavender", "sunset", "gold"}:
         return jsonify({"success": False, "message": "Choose a supported palette."}), 400
     if motion_level not in {"reduced", "balanced", "expressive"}:
         return jsonify({"success": False, "message": "Choose a supported motion level."}), 400
