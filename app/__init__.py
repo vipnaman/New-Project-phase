@@ -107,6 +107,7 @@ def create_app():
         return "Server error", 500
 
     @app.get("/healthz")
+    @limiter.exempt
     def health_check():
         try:
             db.session.execute(text("SELECT 1"))

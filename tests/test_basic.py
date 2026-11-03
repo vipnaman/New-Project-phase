@@ -707,6 +707,11 @@ def test_health_check_confirms_database_is_reachable(client):
     assert response.get_json() == {"status": "ok"}
 
 
+def test_health_check_is_not_limited(client):
+    responses = [client.get("/healthz") for _ in range(55)]
+    assert all(response.status_code == 200 for response in responses)
+
+
 def test_database_url_converts_render_postgres_scheme(monkeypatch):
     monkeypatch.setenv("DATABASE_URL", "postgres://user:password@host.example/db")
     assert get_database_url() == "postgresql://user:password@host.example/db"
