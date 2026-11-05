@@ -17,20 +17,8 @@
     {% block head %}{% endblock %}
   </head>
   <body data-theme="dark">
-    <div class="page-loader" id="page-loader" aria-label="Loading page">
-      <div class="loader-curtain loader-curtain-left" aria-hidden="true"></div>
-      <div class="loader-curtain loader-curtain-right" aria-hidden="true"></div>
-      <div class="loader-content" role="status">
-        <div class="blood-drop-wrap" aria-hidden="true">
-          <span class="blood-drop-pulse"></span>
-          <svg class="blood-drop" viewBox="0 0 48 60" focusable="false">
-            <path d="M24 2C19 12 7 24 7 37a17 17 0 0 0 34 0C41 24 29 12 24 2Z" />
-            <path class="blood-drop-shine" d="M16 31c1-5 4-9 7-13" />
-          </svg>
-        </div>
-        <span class="loader-brand">RAKTA</span>
-        <span class="loader-text">One donation. One connection.</span>
-      </div>
+    <div class="page-loader" id="page-loader" role="status" aria-label="Loading page">
+      <span class="loader-progress" aria-hidden="true"></span>
     </div>
     <canvas class="site-motion" aria-hidden="true"></canvas>
     <header class="site-header">
