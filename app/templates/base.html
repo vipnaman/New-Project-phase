@@ -17,6 +17,10 @@
     {% block head %}{% endblock %}
   </head>
   <body data-theme="dark">
+    <div class="page-loader" id="page-loader" aria-live="polite" aria-label="Loading page">
+      <div class="loader-ring" aria-hidden="true"></div>
+      <span class="loader-text">Loading</span>
+    </div>
     <canvas class="site-motion" aria-hidden="true"></canvas>
     <header class="site-header">
       <div class="container header-top">

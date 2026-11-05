@@ -1,3 +1,36 @@
+const pageLoader = document.getElementById('page-loader');
+
+const hidePageLoader = () => {
+  if (!pageLoader) return;
+  pageLoader.classList.add('hidden');
+  document.body.classList.remove('is-loading');
+};
+
+if (pageLoader) {
+  document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(hidePageLoader, 420);
+  });
+
+  window.addEventListener('beforeunload', () => {
+    pageLoader.classList.remove('hidden');
+    document.body.classList.add('is-loading');
+  });
+
+  document.querySelectorAll('a[href]').forEach((link) => {
+    const href = link.getAttribute('href') || '';
+    if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:')) return;
+
+    const isExternal = /^https?:\/\//i.test(href);
+    const isFile = href.startsWith('/static/') || href.startsWith('/uploads/') || href.includes('.pdf');
+    if (isExternal || link.target === '_blank' || isFile) return;
+
+    link.addEventListener('click', () => {
+      pageLoader.classList.remove('hidden');
+      document.body.classList.add('is-loading');
+    });
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   fetch('/static/data/india-cities.json')
     .then((response) => response.json())

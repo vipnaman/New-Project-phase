@@ -41,6 +41,48 @@ body {
   overflow-x: hidden;
   transition: background 220ms ease, color 220ms ease;
 }
+body.is-loading {
+  overflow: hidden;
+}
+.page-loader {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  gap: 18px;
+  background: radial-gradient(circle at center, rgba(18, 28, 38, 0.7), rgba(7, 12, 18, 0.82));
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 9999;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.38s ease, visibility 0.38s ease;
+}
+.page-loader.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.loader-ring {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.14);
+  border-top-color: var(--primary);
+  border-right-color: rgba(91, 145, 189, 0.8);
+  box-shadow: 0 0 18px rgba(217, 77, 89, 0.2);
+  animation: spin-loader 0.85s linear infinite;
+}
+.loader-text {
+  font-size: 0.74rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(236, 245, 255, 0.85);
+  font-weight: 700;
+}
+@keyframes spin-loader {
+  to { transform: rotate(360deg); }
+}
 body[data-theme="light"] {
   --primary: #c64250;
   --primary-strong: #a72d42;
