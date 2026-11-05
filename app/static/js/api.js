@@ -26,6 +26,30 @@ function updateRequestCardStatus(card, status) {
   card.querySelectorAll('[data-cancel-request], [data-fulfill-request]').forEach(button => button.remove());
 }
 
+function renderRequestSkeletons(container, count = 3) {
+  const cards = Array.from({ length: count }, () => {
+    const card = document.createElement('article');
+    card.className = 'request-card request-skeleton';
+    card.setAttribute('aria-hidden', 'true');
+    const header = document.createElement('div');
+    header.className = 'request-header';
+    const badge = document.createElement('span');
+    badge.className = 'request-skeleton-badge';
+    const bloodGroup = document.createElement('span');
+    bloodGroup.className = 'request-skeleton-badge short';
+    header.append(badge, bloodGroup);
+    const heading = document.createElement('span');
+    heading.className = 'request-skeleton-line heading';
+    const location = document.createElement('span');
+    location.className = 'request-skeleton-line';
+    const units = document.createElement('span');
+    units.className = 'request-skeleton-line short';
+    card.append(header, heading, location, units);
+    return card;
+  });
+  container.replaceChildren(...cards);
+}
+
 function renderDonorCards(items) {
   const container = document.getElementById('donorResults');
   if (!container) return;
@@ -554,9 +578,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const requestList = document.getElementById('requestList');
   if (requestList) {
+    requestList.setAttribute('aria-busy', 'true');
+    renderRequestSkeletons(requestList);
     fetchJson('/api/requests')
       .then(result => {
         const items = result.data.items || [];
+        requestList.setAttribute('aria-busy', 'false');
         requestList.replaceChildren();
         if (!items.length) {
           const empty = document.createElement('div');
@@ -613,6 +640,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       })
       .catch(() => {
+        requestList.setAttribute('aria-busy', 'false');
         requestList.textContent = 'Unable to load requests.';
       });
   }

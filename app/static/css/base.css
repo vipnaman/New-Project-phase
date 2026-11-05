@@ -49,39 +49,154 @@ body.is-loading {
   inset: 0;
   display: grid;
   place-items: center;
-  gap: 18px;
-  background: radial-gradient(circle at center, rgba(18, 28, 38, 0.7), rgba(7, 12, 18, 0.82));
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  overflow: hidden;
   z-index: 9999;
-  opacity: 1;
   visibility: visible;
-  transition: opacity 0.38s ease, visibility 0.38s ease;
+  transition: visibility 0s linear 620ms;
 }
 .page-loader.hidden {
-  opacity: 0;
   visibility: hidden;
   pointer-events: none;
+  transition-delay: 620ms;
 }
-.loader-ring {
-  width: 56px;
-  height: 56px;
+.loader-curtain {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 50.1%;
+  background: linear-gradient(145deg, #121b25, #080d14 72%);
+  transition: transform 620ms cubic-bezier(0.76, 0, 0.24, 1);
+  will-change: transform;
+}
+.loader-curtain-right {
+  right: 0;
+  left: auto;
+  background:
+    radial-gradient(ellipse at 82% 55%, rgba(185, 54, 73, 0.2), transparent 58%),
+    linear-gradient(215deg, #121b25, #080d14 72%);
+}
+.page-loader.hidden .loader-curtain-left {
+  transform: translateX(-102%);
+}
+.page-loader.hidden .loader-curtain-right {
+  transform: translateX(102%);
+}
+.loader-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 180ms ease, transform 260ms ease;
+}
+.page-loader.hidden .loader-content {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition-delay: 100ms;
+}
+.blood-drop-wrap {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 76px;
+  height: 76px;
+  margin-bottom: 10px;
+}
+.blood-drop-pulse {
+  position: absolute;
+  inset: 9px;
+  border: 1px solid rgba(217, 77, 89, 0.35);
   border-radius: 50%;
-  border: 3px solid rgba(255, 255, 255, 0.14);
-  border-top-color: var(--primary);
-  border-right-color: rgba(91, 145, 189, 0.8);
-  box-shadow: 0 0 18px rgba(217, 77, 89, 0.2);
-  animation: spin-loader 0.85s linear infinite;
+  animation: blood-drop-pulse 1.6s ease-out infinite;
+}
+.blood-drop {
+  position: relative;
+  z-index: 1;
+  width: 38px;
+  height: 48px;
+  overflow: visible;
+  fill: var(--primary);
+  filter: drop-shadow(0 0 14px rgba(217, 77, 89, 0.45));
+  animation: blood-drop-beat 1.15s ease-in-out infinite;
+}
+.blood-drop-shine {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.72);
+  stroke-linecap: round;
+  stroke-width: 2.5;
+}
+.loader-brand {
+  color: #f3f7fc;
+  font-size: 1.45rem;
+  font-weight: 800;
+  letter-spacing: 0.3em;
 }
 .loader-text {
-  font-size: 0.74rem;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: rgba(236, 245, 255, 0.85);
-  font-weight: 700;
+  color: rgba(236, 245, 255, 0.72);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
 }
-@keyframes spin-loader {
-  to { transform: rotate(360deg); }
+@keyframes blood-drop-pulse {
+  0% { opacity: 0.65; transform: scale(0.72); }
+  85%, 100% { opacity: 0; transform: scale(1.35); }
+}
+@keyframes blood-drop-beat {
+  0%, 100% { transform: scale(1); }
+  18% { transform: scale(1.08); }
+  32% { transform: scale(0.98); }
+  48% { transform: scale(1.04); }
+}
+.request-skeleton {
+  pointer-events: none;
+}
+.request-skeleton-line,
+.request-skeleton-badge {
+  display: block;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.07));
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.4s ease-in-out infinite;
+}
+.request-skeleton-line {
+  width: 72%;
+  height: 12px;
+  margin: 14px 0;
+}
+.request-skeleton-line.heading {
+  width: 48%;
+  height: 20px;
+  margin-top: 20px;
+}
+.request-skeleton-line.short {
+  width: 36%;
+}
+.request-skeleton-badge {
+  width: 76px;
+  height: 22px;
+}
+.request-skeleton-badge.short {
+  width: 36px;
+}
+@keyframes skeleton-shimmer {
+  to { background-position: -200% 0; }
+}
+body[data-theme="light"] .request-skeleton-line,
+body[data-theme="light"] .request-skeleton-badge {
+  background-image: linear-gradient(90deg, rgba(17, 24, 39, 0.06), rgba(17, 24, 39, 0.12), rgba(17, 24, 39, 0.06));
+}
+@media (prefers-reduced-motion: reduce) {
+  .loader-curtain,
+  .loader-content,
+  .blood-drop,
+  .blood-drop-pulse,
+  .request-skeleton-line,
+  .request-skeleton-badge {
+    animation: none !important;
+    transition: none !important;
+  }
 }
 body[data-theme="light"] {
   --primary: #c64250;
