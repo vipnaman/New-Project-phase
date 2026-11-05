@@ -18,7 +18,7 @@ from app.utils.blood_compatibility import BLOOD_COMPATIBILITY, can_donate_to
 
 requests_bp = Blueprint("requests", __name__)
 REQUEST_STATUSES = {"OPEN", "FULFILLED", "CANCELLED", "EXPIRED"}
-URGENCY_EXPIRY = {"normal": timedelta(days=3), "urgent": timedelta(days=1), "emergency": timedelta(hours=6)}
+URGENCY_EXPIRY = {"normal": timedelta(days=7), "urgent": timedelta(days=7), "emergency": timedelta(days=7)}
 
 
 def serialize_public_request(item):

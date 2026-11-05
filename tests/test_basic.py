@@ -179,6 +179,26 @@ def test_request_expiry_and_public_response_privacy(client):
     assert "description" not in detail
 
 
+def test_all_request_urgencies_remain_open_for_seven_days(client):
+    requester = User(name="Requester", email="weekly-requests@example.com", role="USER")
+    requester.password = "secret123"
+    db.session.add(requester)
+    db.session.commit()
+    client.post("/api/auth/login", json={"email": requester.email, "password": "secret123"})
+
+    for urgency in ("normal", "urgent", "emergency"):
+        response = client.post("/api/requests", json={
+            "blood_group": "O+",
+            "city": "Lucknow",
+            "state": "Uttar Pradesh",
+            "urgency": urgency,
+        })
+
+        assert response.status_code == 201
+        request_item = db.session.get(BloodRequest, response.get_json()["data"]["id"])
+        assert request_item.expires_at - request_item.created_at >= timedelta(days=7) - timedelta(seconds=2)
+
+
 def test_requests_only_link_verified_hospitals(client):
     requester = User(name="Requester", email="requester@example.com", role="USER")
     requester.password = "secret123"
